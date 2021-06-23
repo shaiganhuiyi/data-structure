@@ -141,7 +141,50 @@ void QuickSort(int array[], int size)
 		}
 	}
 }
-void MergeSort(int array[], int left, int right, int* temp)
+//类似合并两个有序链表，合并好之后以依然有序
+void MergeData(int array[], int left, int mid, int right, int* temp)
 {
+	int begin1 = left, end1 = mid;
+	int begin2 = mid, end2 = right;
+	int index = left;
+	while (begin1<end1&&begin2<end2)
+	{
+		if (array[begin1] <= array[begin2])
+			temp[index++] = array[begin1++];
+		else
+			temp[index++] = array[begin2++];
 
+		while(begin1<end1)
+		{
+			temp[index++] = array[begin1++];
+		}
+		while (begin2<end2)
+		{
+			temp[index++] = array[begin2];
+		}
+	}
+}
+void _MergeSort(int array[], int left, int right, int* temp)
+{
+	if (right - left > 1)
+	{
+		int mid = left + ((right - left) >> 1);
+
+		//[left,mid)
+		_MergeSort(array, left, mid, temp);
+
+		//[mid,right)
+		_MergeSort(array, mid, right, temp);
+        //需要将左半侧和有半侧的数据进行归并
+		MergeData(array, left, mid, right, temp);
+		//将temp中的元素拷贝回array
+		memcpy(array + left, temp + left, sizeof(array[0]) * (right - left));
+
+	}
+}
+void MergSort(int array[], int size)
+{
+	int* temp = new int[size];
+	_MergeSort(array,0,size,temp);
+	delete[]temp;
 }
