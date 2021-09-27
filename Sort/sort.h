@@ -18,26 +18,26 @@ void PrintArray(int* array, int size)
 }
 
 
-//²åÈëÅÅĞò
+//æ’å…¥æ’åº
 void InsertSort(int* array, int size)
 {
 	for (int i = 1;i < size;i++) //O(N)
 	{
 		int key = array[i];
 		int end = i - 1;
-		//ÕÒ´ı²åÈëÔªËØµÄÎ»ÖÃ
-		while (end>=0&&key<array[end])//ÉıĞò
-		{   //Èç¹ûÃ¿´Î²åÈëÔªËØ¶¼±ÈÇ°ÃæÒÑ²åÈëµÄÔªËØ¼°´ó£¨×îÓÅ£©O£¨1£©
-			//Ä¿Ç°×îĞ¡O(N)
+		//æ‰¾å¾…æ’å…¥å…ƒç´ çš„ä½ç½®
+		while (end>=0&&key<array[end])//å‡åº
+		{   //å¦‚æœæ¯æ¬¡æ’å…¥å…ƒç´ éƒ½æ¯”å‰é¢å·²æ’å…¥çš„å…ƒç´ åŠå¤§ï¼ˆæœ€ä¼˜ï¼‰Oï¼ˆ1ï¼‰
+			//ç›®å‰æœ€å°O(N)
 			array[end + 1] = array[end];
 			end--;
 		}
-		//²åÈëÔªËØ
+		//æ’å…¥å…ƒç´ 
 		array[end + 1] = key;
 	}
-	//Ê±¼ä¸´ÔÓ¶ÈO(N^2) ¿Õ¼ä¸´ÔÓ¶È0(1)  ÎÈ¶¨
+	//æ—¶é—´å¤æ‚åº¦O(N^2) ç©ºé—´å¤æ‚åº¦0(1)  ç¨³å®š
 }
-//Ï£¶ûÅÅĞò
+//å¸Œå°”æ’åº
 void ShellSort(int* array, int size)
 { 
 	int gap = size;
@@ -48,19 +48,19 @@ void ShellSort(int* array, int size)
 		{
 			int key = array[i];
 			int end = i - gap;
-			//ÕÒ´ı²åÈëÔªËØµÄÎ»ÖÃ
-			while (end >= 0 && key < array[end])//ÉıĞò
+			//æ‰¾å¾…æ’å…¥å…ƒç´ çš„ä½ç½®
+			while (end >= 0 && key < array[end])//å‡åº
 			{
 
 				array[end + gap] = array[end];
 				end-=gap;
 			}
-			//²åÈëÔªËØ
+			//æ’å…¥å…ƒç´ 
 			array[end + gap] = key;
 		}
 		
 	}
-	//Ê±¼ä¸´ÔÓ¶È       ¿Õ¼ä¸´ÔÓ¶ÈO(1)   ²»ÎÈ¶¨
+	//æ—¶é—´å¤æ‚åº¦       ç©ºé—´å¤æ‚åº¦O(1)   ä¸ç¨³å®š
 	
 }
 
@@ -84,7 +84,7 @@ void SelectSortOP(int* array, int size)
 	int begin = 0, end = size - 1;
 	while (begin < end)
 	{
-		//ÕÒµ½×î´óÓë×îĞ¡ÔªËØµÄÎ»ÖÃ
+		//æ‰¾åˆ°æœ€å¤§ä¸æœ€å°å…ƒç´ çš„ä½ç½®
 		int minPos = begin;
 		int maxPos = begin;
 		int index = begin + 1;
@@ -96,11 +96,11 @@ void SelectSortOP(int* array, int size)
 				minPos = index;
 			++index;
 		}
-		//×îÓÒ²àÎ»ÖÃ¿ÉÄÜ´æ´¢µÄÊÇµ±Ç°µÄ×îĞ¡Öµ
+		//æœ€å³ä¾§ä½ç½®å¯èƒ½å­˜å‚¨çš„æ˜¯å½“å‰çš„æœ€å°å€¼
 		if (maxPos != end)
 			Swap(&array[maxPos], &array[end]);
-		//Èç¹û×îÓÒ²àÎ»ÖÃ¿ÉÄÜ´æ´¢µÄÊÇµ±Ç°µÄ×îĞ¡Öµ£¬¾­¹ıÉÏÊö½»»»Ö®ºó£¬×îĞ¡ÖµÎ»ÖÃÒÑ¾­·¢Éú¸Ä±ä
-		//±ØĞëÒª¸üĞÂminPos
+		//å¦‚æœæœ€å³ä¾§ä½ç½®å¯èƒ½å­˜å‚¨çš„æ˜¯å½“å‰çš„æœ€å°å€¼ï¼Œç»è¿‡ä¸Šè¿°äº¤æ¢ä¹‹åï¼Œæœ€å°å€¼ä½ç½®å·²ç»å‘ç”Ÿæ”¹å˜
+		//å¿…é¡»è¦æ›´æ–°minPos
 		if (minPos == end)
 			minPos = maxPos;
 		if (minPos != begin)
@@ -109,17 +109,17 @@ void SelectSortOP(int* array, int size)
 		--end;
 	}
 }
-//¶ÑÅÅĞò
+//å †æ’åº
 void HeapAdjust(int* array, int size, int parent)
 {
-	//ÓĞĞ§±ê¼Ç×óº¢×Ó£¬ÒòÎª¶ÑÊµ¼ÊÉÏÊÇÍêÈ«¶ş²æÊ÷£¬ÒòÎªÍêÈ«¶ş²æÊ÷¿ÉÄÜÖ»ÓĞ×óº¢×ÓÃ»ÓĞÓÒº¢×Ó
+	//æœ‰æ•ˆæ ‡è®°å·¦å­©å­ï¼Œå› ä¸ºå †å®é™…ä¸Šæ˜¯å®Œå…¨äºŒå‰æ ‘ï¼Œå› ä¸ºå®Œå…¨äºŒå‰æ ‘å¯èƒ½åªæœ‰å·¦å­©å­æ²¡æœ‰å³å­©å­
 	int child = parent * 2 + 1;
 	while (child>size)
 	{
-		//ÕÒµ½Á½¸öº¢×ÓÖĞ×î´óµÄº¢×Ó
+		//æ‰¾åˆ°ä¸¤ä¸ªå­©å­ä¸­æœ€å¤§çš„å­©å­
 		if (child+1<size&&array[child + 1] > array[child])
 			child += 1;
-		//¼ì²âË«Ç×ÊÇ·ñ±È½Ï´óµÄº¢×Ó´ó
+		//æ£€æµ‹åŒäº²æ˜¯å¦æ¯”è¾ƒå¤§çš„å­©å­å¤§
 		if (array[child] > array[parent])
 		{
 			Swap(&array[parent], &array[child]);
@@ -136,13 +136,13 @@ void HeapAdjust(int* array, int size, int parent)
 void HeapSort(int* array, int size)
 {   
 	int end = size - 1;
-  	//1.½¨¶Ñ
-	//ÕÒµ¹ÊıµÚÒ»¸ö·ÇÒ¶×Ó½Úµã
+  	//1.å»ºå †
+	//æ‰¾å€’æ•°ç¬¬ä¸€ä¸ªéå¶å­èŠ‚ç‚¹
 	for (int root = (size - 2) >> 1;root >= 0;--root)
 	{
 		HeapAdjust(array, size, root);
 	}
-	//2.ÀûÓÃ¶ÑÉ¾³ıµÄË¼ÏëÀ´½øĞĞÅÅĞò
+	//2.åˆ©ç”¨å †åˆ é™¤çš„æ€æƒ³æ¥è¿›è¡Œæ’åº
 	while (end)
 	{
 		Swap(&array[0], &array[end]);
@@ -192,7 +192,7 @@ int GetMiddleIndex(int array[], int left, int right)
 
 	}
 }
-//hoare°æ±¾
+//hoareç‰ˆæœ¬
 int partion1(int array[], int left, int right)
 {
 	int MidIdex = GetMiddleIndex(array, left, right);
@@ -214,13 +214,13 @@ int partion1(int array[], int left, int right)
 		Swap(&array[begin], &array[right - 1]);
 	return begin;
 }
-int partion2(int array[], int left, int right)//ÍÚ¿Ó·¨
+int partion2(int array[], int left, int right)//æŒ–å‘æ³•
 {
 	int key = array[right - 1];
 	int begin = left;
 	int end = right - 1;
 	while (begin < end)
-	{   //ÈÃbegin´ÓÇ°ÍùºóÕÒ£¬ÕÒ±È»ù×¼Öµ´óµÄÔªËØ
+	{   //è®©beginä»å‰å¾€åæ‰¾ï¼Œæ‰¾æ¯”åŸºå‡†å€¼å¤§çš„å…ƒç´ 
 		while (begin < end && array[begin] <= key)
 			begin++;
 		if (begin < end)
@@ -228,7 +228,7 @@ int partion2(int array[], int left, int right)//ÍÚ¿Ó·¨
 			array[end] = array[begin];
 			end--;
 		}
-		//ÈÃend´ÓºóÍùÇ°ÕÒ£¬ÕÒ±È»ù×¼ÖµĞ¡µÄÔªËØ
+		//è®©endä»åå¾€å‰æ‰¾ï¼Œæ‰¾æ¯”åŸºå‡†å€¼å°çš„å…ƒç´ 
 		while (begin < end && array[end] >= key)
 			end--;
 		if (begin < end)
@@ -240,7 +240,7 @@ int partion2(int array[], int left, int right)//ÍÚ¿Ó·¨
 	array[begin] = key;
 	return begin;
 }
-int partion3(int array[], int left, int right)//Ç°ºóÖ¸Õë
+int partion3(int array[], int left, int right)//å‰åæŒ‡é’ˆ
 {
 	int key = array[right - 1];
 	int cur = left;
@@ -268,8 +268,8 @@ void QuickSort(int array[], int left, int right)
 	else
 	{
 		int  div = partion1(array, left, right);
-		QuickSort(array, left, div);//µİ¹é»ù×¼ÖµµÄ×ó²à
-		QuickSort(array, div + 1, right);//µİ¹é»ù×¼ÖµµÄÓÒ²à
+		QuickSort(array, left, div);//é€’å½’åŸºå‡†å€¼çš„å·¦ä¾§
+		QuickSort(array, div + 1, right);//é€’å½’åŸºå‡†å€¼çš„å³ä¾§
 	}
 }
 void QuickSortNor(int* array, int size)
@@ -324,7 +324,7 @@ void MergeSort(int* array, int left, int right, int* temp)
 		MergeSort(array, left, mid, temp);
 		MergeSort(array, mid, right, temp);
 		Merge(array, left, mid, right, temp);
-		memcpy(array + left, temp + left, right - left);
+		memcpy(array + left, temp + left, (right - left)*sizeof(array[0]))ï¼›
 	}
 }
 void TestSort()
